@@ -10,6 +10,143 @@
     body {
       margin: 0;
       min-height: 100vh;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIR — Sign In</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      color: #f5f5f5;
+      background: radial-gradient(circle at top, #242424, #090909 65%);
+    }
+    .login {
+      width: 100%;
+      max-width: 420px;
+      padding: 38px;
+      border: 1px solid #343434;
+      border-radius: 20px;
+      background: rgba(23, 23, 23, .96);
+      box-shadow: 0 25px 80px #0008;
+    }
+    .brand {
+      font-size: 13px;
+      letter-spacing: 5px;
+      color: #c6a76b;
+      text-align: center;
+    }
+    h1 { text-align: center; margin: 20px 0 8px; }
+    .sub { text-align: center; color: #aaa; font-size: 14px; margin-bottom: 30px; }
+    label { display: block; margin: 18px 0 8px; font-size: 13px; color: #ddd; }
+    input[type="email"], input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #414141;
+      border-radius: 9px;
+      background: #101010;
+      color: white;
+      outline: none;
+    }
+    input:focus { border-color: #c6a76b; }
+    .password { display: flex; gap: 8px; }
+    .password input { flex: 1; min-width: 0; }
+    .toggle {
+      color: #c6a76b; background: transparent;
+      border: 1px solid #414141; border-radius: 9px;
+      padding: 0 10px; cursor: pointer;
+    }
+    .options { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 18px 0; font-size: 12px; }
+    .remember { display: flex; align-items: center; gap: 7px; color: #bbb; }
+    a { color: #c6a76b; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .submit {
+      width: 100%; padding: 14px; border: 0;
+      border-radius: 9px; background: #c6a76b;
+      color: #111; font-weight: bold; cursor: pointer;
+    }
+    .submit:hover { background: #dfc18a; }
+    #message { min-height: 20px; margin-top: 14px; font-size: 13px; text-align: center; color: #f0b3b3; }
+    .signup { text-align: center; color: #aaa; font-size: 13px; margin-top: 22px; }
+    .demo { color: #777; text-align: center; font-size: 11px; line-height: 1.6; margin-top: 24px; }
+    @media (max-width: 450px) { .login { padding: 26px 20px; } }
+  </style>
+</head>
+<body>
+  <main class="login">
+    <div class="brand">N O I R</div>
+    <h1>Welcome back</h1>
+    <p class="sub">Sign in to continue to your account.</p>
+
+    <form id="loginForm">
+      <label for="email">Email address</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+
+      <label for="password">Password</label>
+      <div class="password">
+        <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+        <button class="toggle" id="togglePassword" type="button" aria-label="Show password">Show</button>
+      </div>
+
+      <div class="options">
+        <label class="remember" style="margin:0">
+          <input type="checkbox" id="remember"> Remember me
+        </label>
+        <a href="#forgot" id="forgot">Forgot password?</a>
+      </div>
+
+      <button class="submit" type="submit">Sign In</button>
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="signup">New here? <a href="#signup" id="signup">Create an account</a></div>
+    <p class="demo">FRONTEND DEMO · No real authentication is connected.</p>
+  </main>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const password = document.getElementById("password");
+    const message = document.getElementById("message");
+
+    document.getElementById("togglePassword").addEventListener("click", function () {
+      const visible = password.type === "password";
+      password.type = visible ? "text" : "password";
+      this.textContent = visible ? "Hide" : "Show";
+      this.setAttribute("aria-label", visible ? "Hide password" : "Show password");
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      message.style.color = "#c6a76b";
+      message.textContent = "Form validated! Demo only — no account was authenticated.";
+    });
+
+    document.getElementById("forgot").addEventListener("click", function (event) {
+      event.preventDefault();
+      message.style.color = "#c6a76b";
+      message.textContent = "Password reset is not connected yet.";
+    });
+
+    document.getElementById("signup").addEventListener("click", function (event) {
+      event.preventDefault();
+      message.style.color = "#c6a76b";
+      message.textContent = "Sign-up page will be added in a separate feature branch.";
+    });
+  </script>
+</body>
+</html>
+
       display: grid;
       place-items: center;
       padding: 24px;
