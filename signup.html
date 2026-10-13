@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOIR — Create Account</title>
+  <style>
+    body {
+      margin: 0; min-height: 100vh; display: grid;
+      place-items: center; padding: 20px;
+      box-sizing: border-box; font-family: Arial, sans-serif;
+      color: #fff; background: #101010;
+    }
+    main {
+      width: 100%; max-width: 390px; padding: 30px;
+      box-sizing: border-box; background: #202020;
+      border: 1px solid #444; border-radius: 16px;
+    }
+    .brand { color: #c6a76b; text-align: center; letter-spacing: 5px; }
+    h1, .sub { text-align: center; }
+    .sub { color: #aaa; font-size: 14px; }
+    label { display: block; margin: 18px 0 7px; }
+    input {
+      width: 100%; padding: 12px; box-sizing: border-box;
+      color: white; background: #111; border: 1px solid #555;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%; margin-top: 22px; padding: 13px;
+      border: 0; border-radius: 8px; cursor: pointer;
+      background: #c6a76b; font-weight: bold;
+    }
+    #message { font-size: 13px; line-height: 1.5; }
+    footer { margin-top: 20px; text-align: center; color: #aaa; font-size: 13px; }
+    a { color: #c6a76b; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">N O I R</div>
+    <h1>Create account</h1>
+    <p class="sub">Join us and get started.</p>
+    <form id="signupForm">
+      <label for="name">Full name</label>
+      <input id="name" autocomplete="name" required>
+      <label for="email">Email address</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <label for="password">Password (at least 8 characters)</label>
+      <input id="password" type="password" minlength="8" autocomplete="new-password" required>
+      <label for="confirm">Confirm password</label>
+      <input id="confirm" type="password" minlength="8" autocomplete="new-password" required>
+      <button type="submit">Create account</button>
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+    <footer>Already have an account? <a href="index.html">Sign in</a></footer>
+  </main>
+  <script>
+    const form = document.getElementById("signupForm");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      if (password.value !== confirmPassword.value) {
+        message.style.color = "#ff9999";
+        message.textContent = "Passwords do not match.";
+        confirmPassword.focus();
+        return;
+      }
+      message.style.color = "#c6a76b";
+      message.textContent = "Form validated! This demo does not create a real account.";
+    });
+  </script>
+</body>
+</html>
