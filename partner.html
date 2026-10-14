@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#11100f">
+  <meta name="description" content="Discover the NOIR point of view.">
+  <title>NOIR — A Different Point of View</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f4f0e8;
+      --muted: #aaa59b;
+      --gold: #c6a76b;
+      --line: #37332d;
+      --surface: #171614;
+      --page: #11100f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--gold); }
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
+    .shell { width: min(1160px, calc(100% - 64px)); margin: 0 auto; }
+    .topbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ffffff14;
+    }
+    .wordmark { color: var(--gold); font-size: 14px; letter-spacing: 6px; }
+    .nav { display: flex; align-items: center; gap: 34px; color: #c4c0b8; font-size: 12px; }
+    .nav .sign-in { padding: 11px 16px; border: 1px solid #ffffff35; border-radius: 3px; }
+    .hero {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+      padding-top: 30px;
+      padding-bottom: 80px;
+    }
+    .eyebrow { color: var(--gold); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      max-width: 640px;
+      margin: 24px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 400;
+      letter-spacing: -3px;
+      line-height: .99;
+    }
+    .hero-copy > p:not(.eyebrow) { max-width: 430px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .actions { display: flex; align-items: center; gap: 26px; margin-top: 35px; font-size: 12px; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      background: var(--gold);
+      color: #17130d;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .button:hover { background: #dfc18a; color: #17130d; }
+    .text-link { color: #ded9cf; }
+    .art {
+      position: relative;
+      min-height: 470px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 51% 47%, #7b6442 0, #40372a 25%, transparent 55%),
+        linear-gradient(145deg, #393126, #161513 72%);
+    }
+    .art::before {
+      position: absolute;
+      width: 60%;
+      height: 92%;
+      top: 6%;
+      left: 20%;
+      border: 1px solid #d2b47a55;
+      border-radius: 50% 50% 4px 4px;
+      background: linear-gradient(155deg, #d1b98222, #171513aa 67%);
+      content: "";
+      transform: rotate(-8deg);
+    }
+    .art::after {
+      position: absolute;
+      width: 36%;
+      height: 60%;
+      right: 14%;
+      bottom: -7%;
+      border: 1px solid #d2b47a55;
+      border-radius: 48% 48% 0 0;
+      background: linear-gradient(155deg, #c2a66e66, #30291e 68%);
+      content: "";
+      transform: rotate(13deg);
+    }
+    .art-label {
+      position: absolute;
+      z-index: 1;
+      right: 22px;
+      bottom: 22px;
+      color: #e0d3b7;
+      font-size: 9px;
+      letter-spacing: 3px;
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: .7fr 1fr;
+      gap: 80px;
+      padding: 100px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    h2 { font: 400 clamp(34px, 4vw, 50px)/1.08 Georgia, "Times New Roman", serif; letter-spacing: -1px; }
+    .intro-copy { max-width: 540px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); }
+    .note { min-height: 220px; padding: 32px; background: var(--page); }
+    .note-number { color: var(--gold); font-size: 10px; letter-spacing: 2px; }
+    .note h3 { margin: 32px 0 12px; font: 400 23px Georgia, "Times New Roman", serif; }
+    .note p { max-width: 290px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .closing { padding: 100px 0; text-align: center; }
+    .closing h2 { max-width: 600px; margin: 18px auto 30px; }
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 25px 0 32px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 40px, 560px); }
+      .topbar { min-height: 72px; }
+      .nav { gap: 18px; }
+      .nav a:not(.sign-in) { display: none; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 38px; padding-top: 76px; padding-bottom: 65px; }
+      h1 { font-size: clamp(54px, 14vw, 78px); }
+      .art { min-height: 360px; }
+      .intro { grid-template-columns: 1fr; gap: 15px; padding: 70px 0; }
+      .notes { grid-template-columns: 1fr; }
+      .note { min-height: 180px; }
+      .note h3 { margin-top: 25px; }
+      .closing { padding: 75px 0; }
+    }
+    @media (max-width: 420px) {
+      .shell { width: calc(100% - 32px); }
+      .actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+      .art { min-height: 300px; }
+      footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a class="wordmark" href="#top" aria-label="NOIR home">N O I R</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#story">Our point of view</a>
+      <a href="#details">The details</a>
+      <a class="sign-in" href="index.html">Sign in</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="shell hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A different point of view</p>
+        <h1 id="hero-title">Make space for what matters.</h1>
+        <p>A considered perspective, shaped by the details. Welcome to NOIR — a place to pause, look closer, and find your own way forward.</p>
+        <div class="actions">
+          <a class="button" href="#story">Discover NOIR</a>
+          <a class="text-link" href="#details">A little more about us <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="art" role="img" aria-label="Abstract gold and charcoal forms">
+        <span class="art-label">FORM · TEXTURE · LIGHT</span>
+      </div>
+    </section>
+
+    <section class="shell intro" id="story" aria-labelledby="story-title">
+      <div>
+        <p class="eyebrow">The NOIR perspective</p>
+        <h2 id="story-title">Quiet confidence. Room to be yourself.</h2>
+      </div>
+      <p class="intro-copy">We believe the most lasting impressions are made without saying too much. NOIR is an invitation to explore a more considered point of view — one built around individuality, intention, and the beauty of a detail noticed.</p>
+    </section>
+
+    <section class="shell notes" id="details" aria-label="What guides us">
+      <article class="note">
+        <span class="note-number">01 / INTENTION</span>
+        <h3>Thoughtful by nature</h3>
+        <p>Every point of view starts with a question: what deserves a little more attention?</p>
+      </article>
+      <article class="note">
+        <span class="note-number">02 / CHARACTER</span>
+        <h3>Never just one thing</h3>
+        <p>We leave room for contrast, character, and the unexpected ways they come together.</p>
+      </article>
+      <article class="note">
+        <span class="note-number">03 / POSSIBILITY</span>
+        <h3>Always becoming</h3>
+        <p>This is a starting point — the best parts are the ones still waiting to be imagined.</p>
+      </article>
+    </section>
+
+    <section class="shell closing" aria-labelledby="closing-title">
+      <p class="eyebrow">Your story, your way</p>
+      <h2 id="closing-title">Come in. Take a closer look.</h2>
+      <a class="button" href="index.html">Sign in to NOIR</a>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <a class="wordmark" href="#top" aria-label="Back to top">N O I R</a>
+    <span>A little room for a different point of view.</span>
+    <a href="index.html">Sign in</a>
+  </footer>
+</body>
+</html>
