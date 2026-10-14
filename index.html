@@ -113,7 +113,7 @@
         <a href="#forgot" id="forgot">Forgot password?</a>
       </div>
 
-      <button class="submit" type="submit">Sign In</button>
+      <button class="submit" id="signIn" type="button">Sign In</button>
       <p id="message" role="status" aria-live="polite"></p>
     </form>
 
@@ -126,6 +126,7 @@
     const password = document.getElementById("password");
     const message = document.getElementById("message");
     const togglePassword = document.getElementById("togglePassword");
+    const signIn = document.getElementById("signIn");
 
     togglePassword.addEventListener("click", function () {
       const visible = password.type === "password";
@@ -135,10 +136,18 @@
       this.setAttribute("aria-pressed", String(visible));
     });
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+    function showDemoMessage() {
       if (!form.reportValidity()) return;
       message.textContent = "Demo only: your credentials were not sent or verified.";
+    }
+
+    signIn.addEventListener("click", showDemoMessage);
+
+    form.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        showDemoMessage();
+      }
     });
 
     document.getElementById("forgot").addEventListener("click", function (event) {
